@@ -50,9 +50,11 @@ while(pres == "null"):
         allWords = []
         allWordsTemp = []
 
-        #create lists to store all chars
+        #create variables to count all chars (without spaces)
         CharsWhithoutSpacesTemp = []
         Charcount = 0
+
+        #create variables to count chars with spaces
 
 
 
@@ -68,8 +70,6 @@ while(pres == "null"):
                 tempWordsSplit = tempLine.split(" ")
                 allWordsTemp.append(tempWordsSplit[i])
 
-
-
         #remove word if its just a space
         for n in range(len(allWordsTemp)):
 
@@ -79,6 +79,10 @@ while(pres == "null"):
 
             else:
                 allWords.append(allWordsTemp[n])
+
+
+
+
 
         #each word in the presentation without spaces
         for i in range(len(allWords)):
@@ -97,11 +101,12 @@ while(pres == "null"):
 
         print("-----------------------------------------------------------------")
         print("Total words: " + str(len(allWords)))
-        print("Total caracters without spaces: " + str(Charcount))
+        print("Total lines: " + str(len(text)))
+        print("Total caracters (without spaces): " + str(Charcount))
 
 
     except Exception as exc:
 
-        print("File not supported!")
+        print("Error! Dod you chose a .pptx file?")
         pres = "null"
         print(exc)
