@@ -36,15 +36,25 @@ while(pres == "null"):
 
     try:
 
+        print("reading file...")
+
         #get presentation
         pres = Presentation(filename)
 
         #count file
         text = count(pres)
+        print("counting presentation please wait...")
 
-        #create list to store all words
+
+        #create lists to store all words
         allWords = []
         allWordsTemp = []
+
+        #create lists to store all chars
+        CharsWhithoutSpacesTemp = []
+        Charcount = 0
+
+
 
         #each text line
         for n in range(len(text)):
@@ -70,8 +80,25 @@ while(pres == "null"):
             else:
                 allWords.append(allWordsTemp[n])
 
-        print("-------------------------------------------")
+        #each word in the presentation without spaces
+        for i in range(len(allWords)):
+
+            #add word as charlist to temp list
+            CharsWhithoutSpacesTemp.append(list(allWords[i]))
+
+        #for each charlist in the temp list (a charlist is one word)
+        for i in range(len(CharsWhithoutSpacesTemp)):
+
+            Charcount = Charcount + len(CharsWhithoutSpacesTemp)
+
+
+
+
+
+        print("-----------------------------------------------------------------")
         print("Total words: " + str(len(allWords)))
+        print("Total caracters without spaces: " + str(Charcount))
+
 
     except Exception as exc:
 
