@@ -10,24 +10,27 @@ except Exception as exc:
 
     #for windows
     if(OS == "Windows"):
-        print("1. Open CMD (search for cmd and press enter)")
-        print("2. Enter \"py -m pip install python pptx\"")
-        print("If this does not work enter \"py -m easy_install python-pptx\"")
+        print("1. Open CMD (search for cmd and press enter).")
+        print("2. Enter \"py -m pip install python pptx\".")
+        print("If this does not work enter \"py -m easy_install python-pptx\".")
+        exit(1)
 
     #for mac
-    elif(OS == "Darvin"):
-        print("1. Open a terminal")
-        print("2. Run \"sudo pip install python-pptx\"")
-        print("3. If necessary enter password")
-        print("4. Confirm all questions showing up in the terminal. Usually you only have to type \"Y\" and hit enter")
+    elif(OS == "Darwin"):
+        print("1. Run \"python -m pip install python-pptx\" in a terminal.")
+        print("2. As he asks you to install \"Command Line developer tools\", hit install (About 150MB) .")
+        print("2. If necessary enter password")
+        print("3. Confirm all questions showing up in the terminal. Usually you only have to type \"Y\" and hit enter.")
+        print("4. After the first start of DocuCount you can delete the command line tools (Delete the folder at Library\Developer\CommandLineTools). The directory might have a slightly differing name")
+        exit(1)
 
     #for linux
     elif(OS == "Linux"):
-        print("1. Open a terminal")
-        print("2. Run \"sudo pip install python-pptx\"")
-        print("3. If necessary enter password")
-        print("4. Confirm all questions showing up in the terminal. Usually you only have to type \"Y\" and hit enter")
-
+        print("1. Open a terminal.")
+        print("2. Run \"sudo pip install python-pptx\".")
+        print("3. If necessary enter password.")
+        print("4. Confirm all questions showing up in the terminal. Usually you only have to type \"Y\" and hit enter.")
+        exit(1)
 
 
 
