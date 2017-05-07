@@ -1,18 +1,41 @@
 #!/usr/bin/env python
+import platform
+#import python-pptx
 try:
     from pptx import Presentation
 except Exception as exc:
 
     print("python-pptx is required!")
-    #OS =
+    OS = platform.system()
+
+    #for windows
+    if(OS == "Windows"):
+        print("1. Open CMD (search for cmd and press enter)")
+        print("2. Enter \"py -m pip install python pptx\"")
+        print("If this does not work enter \"py -m easy_install python-pptx\"")
+
+    #for mac
+    else if(OS == "Darvin"):
+        print("1. Open a terminal")
+        print("2. Run \"sudo pip install python-pptx\"")
+        print("3. If necessary enter password")
+        print("4. Confirm all questions showing up in the terminal. Usually you only have to type \"Y\" and hit enter")
+
+    #for linux
+    else if(OS == "Linux"):
+        print("1. Open a terminal")
+        print("2. Run \"sudo pip install python-pptx\"")
+        print("3. If necessary enter password")
+        print("4. Confirm all questions showing up in the terminal. Usually you only have to type \"Y\" and hit enter")
+
+
+
 
 
 from tkinter import Tk
 from tkinter.filedialog import askopenfilename
-import platform
 
-OS = platform.system()
-print(OS)
+
 
 def count(p):
 
