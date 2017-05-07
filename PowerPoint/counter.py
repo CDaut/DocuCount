@@ -125,7 +125,7 @@ while True:
             allTextOneString = "".join(allWords)
 
 
-
+            #print results
             print("-----------------------------------------------------------------")
             print("Total words: " + str(len(allWords)))
             print("Total lines: " + str(len(text)))
@@ -133,6 +133,7 @@ while True:
             print("Total caracters (with spaces): " + str(len("".join(text))))
             print("-----------------------------------------------------------------")
 
+            #exit
             cmd = input("Hit enter to count another document, enter \"q\" to exit >>> ")
             if(cmd == "q"):
                 print("Thank you for using DocuCount!")
