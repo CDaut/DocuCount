@@ -15,14 +15,14 @@ except Exception as exc:
         print("If this does not work enter \"py -m easy_install python-pptx\"")
 
     #for mac
-    else if(OS == "Darvin"):
+    elif(OS == "Darvin"):
         print("1. Open a terminal")
         print("2. Run \"sudo pip install python-pptx\"")
         print("3. If necessary enter password")
         print("4. Confirm all questions showing up in the terminal. Usually you only have to type \"Y\" and hit enter")
 
     #for linux
-    else if(OS == "Linux"):
+    elif(OS == "Linux"):
         print("1. Open a terminal")
         print("2. Run \"sudo pip install python-pptx\"")
         print("3. If necessary enter password")
