@@ -126,8 +126,6 @@ while True:
 
 
 
-
-
             print("-----------------------------------------------------------------")
             print("Total words: " + str(len(allWords)))
             print("Total lines: " + str(len(text)))
