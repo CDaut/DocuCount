@@ -61,90 +61,88 @@ def count(p):
 #####MAIN#####
 
 
-pres = "null"
 
-while(pres == "null"):
+while True:
 
-    #get file chooser
-    Tk().withdraw()
-    filename = askopenfilename()
+    pres = "null"
+    while(pres == "null"):
 
-    if(filename == ""):
-        break
+        #get file chooser
+        Tk().withdraw()
+        filename = askopenfilename()
 
-    try:
+        if(filename == ""):
+            break
 
-        print("reading file...")
+        try:
 
-        #get presentation
-        pres = Presentation(filename)
+            print("reading file...")
 
-        #count file
-        text = count(pres)
-        print("counting presentation please wait...")
+            #get presentation
+            pres = Presentation(filename)
 
-
-        #create lists to store all words
-        allWords = []
-        allWordsTemp = []
-
-        #create variables to count all chars (without spaces)
-        CharsWhithoutSpacesTemp = []
-        Charcount = 0
-
-        #create variables to count chars with spaces
+            #count file
+            text = count(pres)
+            print("counting presentation please wait...")
 
 
+            #create lists to store all words
+            allWords = []
+            allWordsTemp = []
 
-        #each text line
-        for n in range(len(text)):
+            #create variables to count all chars (without spaces)
+            CharsWhithoutSpacesTemp = []
+            Charcount = 0
 
-            tempLine = text[n]
-
-            #each word in tempLine
-            for i in range(len(tempLine.split(" "))):
-
-                #add each word
-                tempWordsSplit = tempLine.split(" ")
-                allWordsTemp.append(tempWordsSplit[i])
-
-        #remove word if its just a space
-        for n in range(len(allWordsTemp)):
-
-            #if the word is a space it may not be counted
-            if(allWordsTemp[n] == "" or allWordsTemp[n] == " "):
-                    pass
-
-            else:
-                allWords.append(allWordsTemp[n])
+            #create variables to count chars with spaces
+            allTextOneString = []
 
 
+            #each text line
+            for n in range(len(text)):
+
+                tempLine = text[n]
+
+                #each word in tempLine
+                for i in range(len(tempLine.split(" "))):
+
+                    #add each word
+                    tempWordsSplit = tempLine.split(" ")
+                    allWordsTemp.append(tempWordsSplit[i])
+
+            #remove word if its just a space
+            for n in range(len(allWordsTemp)):
+
+                #if the word is a space it may not be counted
+                if(allWordsTemp[n] == "" or allWordsTemp[n] == " "):
+                        pass
+
+                else:
+                    allWords.append(allWordsTemp[n])
 
 
-
-        #each word in the presentation without spaces
-        for i in range(len(allWords)):
-
-            #add word as charlist to temp list
-            CharsWhithoutSpacesTemp.append(list(allWords[i]))
-
-        #for each charlist in the temp list (a charlist is one word)
-        for i in range(len(CharsWhithoutSpacesTemp)):
-
-            Charcount = Charcount + len(CharsWhithoutSpacesTemp)
+            #get list for all caracters without spaces
+            allTextOneString = "".join(allWords)
 
 
 
 
 
-        print("-----------------------------------------------------------------")
-        print("Total words: " + str(len(allWords)))
-        print("Total lines: " + str(len(text)))
-        print("Total caracters (without spaces): " + str(Charcount))
+            print("-----------------------------------------------------------------")
+            print("Total words: " + str(len(allWords)))
+            print("Total lines: " + str(len(text)))
+            print("Total caracters (without spaces): " + str(len(allTextOneString)))
+            print("Total caracters (with spaces): " + str(len("".join(text))))
+            print("-----------------------------------------------------------------")
+
+            cmd = input("Hit enter to count another document, enter \"q\" to exit >>> ")
+            if(cmd == "q"):
+                print("Thank you for using DocuCount!")
+                exit(0)
 
 
-    except Exception as exc:
+        except Exception as exc:
 
-        print("Error! Dod you chose a .pptx file?")
-        pres = "null"
-        print(exc)
+            print("Error! Did you chose a .pptx file?")
+            pres = "null"
+            print("Error Code: " + exc)
