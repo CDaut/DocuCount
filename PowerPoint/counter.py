@@ -1,6 +1,18 @@
-from pptx import Presentation
+#!/usr/bin/env python
+try:
+    from pptx import Presentation
+except Exception as exc:
+
+    print("python-pptx is required!")
+    #OS =
+
+
 from tkinter import Tk
 from tkinter.filedialog import askopenfilename
+import platform
+
+OS = platform.system()
+print(OS)
 
 def count(p):
 
