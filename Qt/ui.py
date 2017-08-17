@@ -14,6 +14,11 @@ try:
 except Exception as e:
     print(e)
 
+###########CONFIG#######
+PRINT_RESULTS_IN_CONSOLE = True
+###########CONFIG#######
+
+
 
 class Ui_root(object):
 
@@ -112,6 +117,7 @@ class Ui_root(object):
         self.statusbar.setObjectName("statusbar")
         root.setStatusBar(self.statusbar)
         self.btnOpen.clicked.connect(self.openFile)
+        self.btnCount.clicked.connect(self.countFile)
 
         self.retranslateUi(root)
         QtCore.QMetaObject.connectSlotsByName(root)
@@ -122,15 +128,102 @@ class Ui_root(object):
         Tk().withdraw()
         filename = askopenfilename()
 
-        if(filename != ""):
-            self.logger.setText("Trying to load: " + str(filename) + "...")
+        if not(filename  == "" or filename  == "()" or filename  == None):
+            self.logger.append("Trying to load: " + str(filename) + "...")
 
+            #try to load presentation
             try:
                 Pres = Presentation(filename)
-                print(Pres)
+                self.logger.append(filename + " loaded successfully!")
+                self.Pres = Pres
 
+            #if loading fails
             except Exception as exc:
-                print("failed")
+                self.logger.append("Failed to load presentation! Check console for error code.")
+                print(exc)
+        else:
+            pass
+
+    def countFile(self):
+        if not(self.Pres  == None ):
+
+            self.logger.append("counting...")
+
+            p = self.Pres
+
+            #list for all strings
+            text = []
+
+            #get all text
+            for slide in p.slides: #each slide
+                for shape in slide.shapes:  #each shape
+                    if(not shape.has_text_frame): #continue if the shape has no text frames
+                        continue
+                    for paragraph in shape.text_frame.paragraphs: #for each paragraph
+
+                        for run in paragraph.runs: #for each run
+                            text.append(run.text)  #get text and store
+
+
+
+            #create lists to store all words
+            allWords = []
+            allWordsTemp = []
+
+            #create variables to count all chars (without spaces)
+            CharsWhithoutSpacesTemp = []
+            Charcount = 0
+
+            #create variables to count chars with spaces
+            allTextOneString = []
+
+
+            #each text line
+            for n in range(len(text)):
+
+                tempLine = text[n]
+
+                #each word in tempLine
+                for i in range(len(tempLine.split(" "))):
+
+                    #add each word
+                    tempWordsSplit = tempLine.split(" ")
+                    allWordsTemp.append(tempWordsSplit[i])
+
+            #remove word if its just a space
+            for n in range(len(allWordsTemp)):
+
+                #if the word is a space it may not be counted
+                if(allWordsTemp[n] == "" or allWordsTemp[n] == " "):
+                        pass
+
+                else:
+                    allWords.append(allWordsTemp[n])
+
+
+            #get list for all caracters without spaces
+            allTextOneString = "".join(allWords)
+
+            self.logger.append("counted!")
+
+            #set labels
+            self.CharWOSValueLabel.setText(str(len(allTextOneString)))
+            self.LinesValueLabel.setText(str(len(text)))
+            self.WordsValueLabel.setText(str(len(allWords)))
+            self.CharWSValueLabel.setText(str(len("".join(text))))
+
+            if(PRINT_RESULTS_IN_CONSOLE):
+                #print results
+                print("-----------------------------------------------------------------")
+                print("Total words: " + str(len(allWords)))
+                print("Total lines: " + str(len(text)))
+                print("Total caracters (without spaces): " + str(len(allTextOneString)))
+                print("Total caracters (with spaces): " + str(len("".join(text))))
+                print("-----------------------------------------------------------------")
+
+        else:
+            self.logger.append("Please open a presentation first.")
+
 
 
     def retranslateUi(self, root):
