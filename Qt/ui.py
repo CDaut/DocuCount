@@ -7,11 +7,22 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from tkinter import Tk
+from tkinter.filedialog import askopenfilename
+try:
+    from pptx import Presentation
+except Exception as e:
+    print(e)
+
 
 class Ui_root(object):
 
+    def __init__(self, Pres):
+        self.Pres = Pres
+
     def setupUi(self, root):
-        
+
+
         root.setObjectName("root")
         root.resize(773, 540)
         root.setTabShape(QtWidgets.QTabWidget.Rounded)
@@ -100,9 +111,27 @@ class Ui_root(object):
         self.statusbar = QtWidgets.QStatusBar(root)
         self.statusbar.setObjectName("statusbar")
         root.setStatusBar(self.statusbar)
+        self.btnOpen.clicked.connect(self.openFile)
 
         self.retranslateUi(root)
         QtCore.QMetaObject.connectSlotsByName(root)
+
+    def openFile(self):
+
+        #get file chooser
+        Tk().withdraw()
+        filename = askopenfilename()
+
+        if(filename != ""):
+            self.logger.setText("Trying to load: " + str(filename) + "...")
+
+            try:
+                Pres = Presentation(filename)
+                print(Pres)
+
+            except Exception as exc:
+                print("failed")
+
 
     def retranslateUi(self, root):
         _translate = QtCore.QCoreApplication.translate
@@ -111,5 +140,5 @@ class Ui_root(object):
         self.LinesLabel.setText(_translate("root", "Total lines: "))
         self.CharLabelWOS.setText(_translate("root", "Total characters (without spaces): "))
         self.CharLabelWS.setText(_translate("root", "Total characters (with spaces): "))
-        self.btnOpen.setText(_translate("root", "open"))
+        self.btnOpen.setText(_translate("root", "open presentation"))
         self.btnCount.setText(_translate("root", "count"))
