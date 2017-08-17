@@ -1,2 +1,2 @@
 # DocuCount
-Counter for powerPoint and Excel files
+A free counter for powerpoint presentations mainly made for translators.
